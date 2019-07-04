@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">Arbnco </mat-toolbar>
-&nbsp;
+&nbsp; &nbsp;
 <div
   style=" display: flex;
 justify-content: center;
 align-items: center;"
 >
-  <mat-card class="card">
+  <mat-card class="card" style="border-radius: 10%">
     <mat-card-header>
       <mat-card-title>
         <h3>Enter a city to search</h3>
@@ -20,21 +20,37 @@ align-items: center;"
           name="first"
         />
       </mat-form-field>
+      &nbsp;
       <button
-        mat-button
-        color="accent"
+        mat-raised-button
+        color="primary"
         (click)="searchCity()"
         [disabled]="this.city == null || this.city == ''"
       >
         SEARCH
       </button>
     </form>
+    <button mat-raised-button color="primary" (click)="clear()">
+      clear
+    </button>
+    &nbsp;
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="initTempChart()"
+      [disabled]="!submitted"
+    >
+      chart
+    </button>
   </mat-card>
 </div>
 
 <div *ngIf="submitted && this.data">
   <h2>The city you looked up is : {{ this.city }}</h2>
-  <h5>press the 'chart' button to see all the temperatures</h5>
+  <h5>
+    press the 'chart' button to see a chart for the Temperature and Humidity for
+    the next days
+  </h5>
 </div>
 
 <div *ngIf="this.showChart && this.data" style="display:block">
@@ -51,6 +67,3 @@ align-items: center;"
 height: 400px; display: block;"
   ></highcharts-chart>
 </div>
-
-<button (click)="clear()">clear</button>
-<button (click)="initTempChart()">chart</button>

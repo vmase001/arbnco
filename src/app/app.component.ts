@@ -72,6 +72,7 @@ export class AppComponent {
 
   initTempChart() {
     this.showChart = true;
+    this.submitted = true;
     if (this.submitted) {
       this.data.list.forEach(element => {
         this.tempArray.push(element.main.temp);
