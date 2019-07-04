@@ -1,2 +1,24 @@
-<h1>hi</h1>
+<mat-toolbar color="primary">Arbnco </mat-toolbar>
 
+<div class="ng-container">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="enter city"
+        [(ngModel)]="this.city"
+        name="first"
+      />
+    </mat-form-field>
+    <button
+      mat-button
+      color="accent"
+      (click)="searchCity()"
+      [disabled]="this.city == null || this.city == ''"
+    >
+      SEARCH
+    </button>
+  </form>
+</div>
+
+<button (click)="check()">print</button>
