@@ -1,24 +1,44 @@
 <mat-toolbar color="primary">Arbnco </mat-toolbar>
-
-<div class="ng-container">
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input
-        matInput
-        placeholder="enter city"
-        [(ngModel)]="this.city"
-        name="first"
-      />
-    </mat-form-field>
-    <button
-      mat-button
-      color="accent"
-      (click)="searchCity()"
-      [disabled]="this.city == null || this.city == ''"
-    >
-      SEARCH
-    </button>
-  </form>
+&nbsp;
+<div
+  style=" display: flex;
+justify-content: center;
+align-items: center;"
+>
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Enter a city to search</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="enter city"
+          [(ngModel)]="this.city"
+          name="first"
+        />
+      </mat-form-field>
+      <button
+        mat-button
+        color="accent"
+        (click)="searchCity()"
+        [disabled]="this.city == null || this.city == ''"
+      >
+        SEARCH
+      </button>
+    </form>
+  </mat-card>
 </div>
 
-<button (click)="check()">print</button>
+<div *ngIf="submitted && this.data">
+  <h2>City: {{ this.data.city.name }}</h2>
+  <ul>
+    <li *ngFor="let temp of this.data.list">
+      Temperature : {{ temp.main.temp }}
+    </li>
+  </ul>
+</div>
+
+<button (click)="clear()">clear</button>

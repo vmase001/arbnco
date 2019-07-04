@@ -14,10 +14,12 @@ export class AppComponent {
   data: any;
   city = null;
   key = 'b68581d5f05bba4d0037174e9e2efb31';
+  submitted = false;
 
   constructor(private http: HttpClient) {}
 
   searchCity() {
+    this.submitted = true;
     return this.http
       .get(
         'https://api.openweathermap.org/data/2.5/forecast?q=' +
@@ -29,7 +31,8 @@ export class AppComponent {
       .subscribe(response => (this.data = response));
   }
 
-  check() {
-    console.log(this.data.list[0].main.temp);
+  clear() {
+    this.submitted = false;
+    this.city = null;
   }
 }
