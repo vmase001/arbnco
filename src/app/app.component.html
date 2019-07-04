@@ -33,12 +33,24 @@ align-items: center;"
 </div>
 
 <div *ngIf="submitted && this.data">
-  <h2>City: {{ this.data.city.name }}</h2>
-  <ul>
-    <li *ngFor="let temp of this.data.list">
-      Temperature : {{ temp.main.temp }}
-    </li>
-  </ul>
+  <h2>The city you looked up is : {{ this.city }}</h2>
+  <h5>press the 'chart' button to see all the temperatures</h5>
+</div>
+
+<div *ngIf="this.showChart && this.data" style="display:block">
+  <highcharts-chart
+    [Highcharts]="tempcharts"
+    [options]="chartOptions"
+    style="width: 50%;
+  height: 400px; display: block;"
+  ></highcharts-chart>
+  <highcharts-chart
+    [Highcharts]="humicharts"
+    [options]="humiChartOptions"
+    style="width: 50%;
+height: 400px; display: block;"
+  ></highcharts-chart>
 </div>
 
 <button (click)="clear()">clear</button>
+<button (click)="initTempChart()">chart</button>

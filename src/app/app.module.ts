@@ -12,8 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 
+import { HighchartsChartComponent } from 'highcharts-angular';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HighchartsChartComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

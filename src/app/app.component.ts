@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as Highcharts from 'highcharts';
 import 'rxjs';
 
 @Component({
@@ -15,8 +16,71 @@ export class AppComponent {
   city = null;
   key = 'b68581d5f05bba4d0037174e9e2efb31';
   submitted = false;
+  tempArray = [];
+  humiArray = [];
+  showChart = false;
 
   constructor(private http: HttpClient) {}
+
+  tempcharts = Highcharts;
+  chartOptions = {
+    chart: {
+      type: 'spline'
+    },
+    title: {
+      text: 'Temperature'
+    },
+    xAxis: {},
+    yAxis: {
+      title: {
+        text: 'Temperature °F'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' °F'
+    },
+    series: [
+      {
+        data: this.tempArray
+      }
+    ]
+  };
+
+  humicharts = Highcharts;
+  humiChartOptions = {
+    chart: {
+      type: 'spline'
+    },
+    title: {
+      text: 'Humidity'
+    },
+    xAxis: {},
+    yAxis: {
+      title: {
+        text: 'Humidity %'
+      }
+    },
+    tooltip: {
+      valueSuffix: ' %'
+    },
+    series: [
+      {
+        data: this.humiArray
+      }
+    ]
+  };
+
+  initTempChart() {
+    this.showChart = true;
+    if (this.submitted) {
+      this.data.list.forEach(element => {
+        this.tempArray.push(element.main.temp);
+      });
+      this.data.list.forEach(element => {
+        this.humiArray.push(element.main.humidity);
+      });
+    }
+  }
 
   searchCity() {
     this.submitted = true;
@@ -34,5 +98,6 @@ export class AppComponent {
   clear() {
     this.submitted = false;
     this.city = null;
+    this.showChart = false;
   }
 }
