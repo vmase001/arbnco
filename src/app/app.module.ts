@@ -11,12 +11,17 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 import { HighchartsChartComponent } from 'highcharts-angular';
 
 @NgModule({
   declarations: [AppComponent, HighchartsChartComponent],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

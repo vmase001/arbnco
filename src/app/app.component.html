@@ -4,6 +4,8 @@
     nature_people
   </i>
 </mat-toolbar>
+<br />
+<h2>Weather App</h2>
 &nbsp; &nbsp;
 <div
   style=" display: flex;
@@ -76,6 +78,19 @@ align-items: center;"
 </div>
 
 <div *ngIf="this.showChart && this.data" style="display:block">
+  <button mat-raised-button color="primary" (click)="save()">
+    <i class="material-icons">
+      show_chart
+    </i>
+    save
+  </button>
+  &nbsp;
+  <button mat-raised-button color="primary" (click)="showLog()">
+    <i class="material-icons">
+      show_chart
+    </i>
+    show log
+  </button>
   <highcharts-chart
     [Highcharts]="tempcharts"
     [options]="chartOptions"
