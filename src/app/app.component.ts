@@ -21,6 +21,7 @@ export class AppComponent {
   tempArray = [];
   humiArray = [];
   showChart = false;
+  showlog = false;
   date = new Date().toJSON();
 
   constructor(private http: HttpClient, public db: AngularFirestore) {}
@@ -103,6 +104,7 @@ export class AppComponent {
     this.submitted = false;
     this.city = null;
     this.showChart = false;
+    this.showlog = false;
   }
 
   saveQuery() {
@@ -122,15 +124,12 @@ export class AppComponent {
   getlog() {
     return this.db
       .collection('items')
-      .snapshotChanges()
+      .valueChanges()
       .subscribe(response => (this.loggedData = response));
   }
 
   showLog() {
     this.getlog();
-    //console.log(this.loggedData[0].payload.doc.id);
-    if (this.loggedData) {
-      console.log(this.loggedData);
-    }
+    this.showlog = true;
   }
 }
