@@ -1,90 +1,7 @@
-<mat-toolbar color="primary"
-  >Arbnco &nbsp;
-  <i class="material-icons" style="size: 20px">
-    nature_people
-  </i>
-</mat-toolbar>
-<br />
-<h2>Weather App</h2>
-&nbsp; &nbsp;
-<div
-  style=" display: flex;
-justify-content: center;
-align-items: center;"
->
-  <mat-card class="card" style="border-radius: 10%">
-    <mat-card-header>
-      <mat-card-title>
-        <h3>Enter a city to look up the weather</h3>
-      </mat-card-title>
-    </mat-card-header>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input
-          matInput
-          placeholder="enter city"
-          [(ngModel)]="this.city"
-          name="first"
-        />
-      </mat-form-field>
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="searchCity()"
-        [disabled]="this.city == null || this.city == ''"
-      >
-        <i class="material-icons">
-          search
-        </i>
-        SEARCH
-      </button>
-    </form>
-    <!-- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    &nbsp; &nbsp; &nbsp; -->
-    <div
-      style="margin-left: auto;
-    margin-right: auto;
-    width: 500px"
-    >
-      <button mat-raised-button color="primary" (click)="clear()">
-        <i class="material-icons">
-          clear
-        </i>
-        clear
-      </button>
-      &nbsp;
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="initTempChart()"
-        [disabled]="!submitted"
-      >
-        <i class="material-icons">
-          show_chart
-        </i>
-        chart
-      </button>
-      &nbsp;
-      <button mat-raised-button color="primary" (click)="showLog()">
-        <i class="material-icons">
-          sd_storage
-        </i>
-        show log
-      </button>
-    </div>
-  </mat-card>
-</div>
+<app-header></app-header>
+<router-outlet></router-outlet>
 
-<div *ngIf="submitted && this.data">
-  <h2>The city you looked up is : {{ this.city }}</h2>
-  <h5>
-    press the 'chart' button to see a chart for the Temperature and Humidity for
-    the next days
-  </h5>
-</div>
-
-<div *ngIf="this.showChart && this.data" style="display:block">
+<div *ngIf="this.showChart && this.data">
   <button mat-raised-button color="primary" (click)="save()">
     <i class="material-icons">
       save
@@ -97,12 +14,6 @@ align-items: center;"
     [options]="chartOptions"
     style="width: 50%;
   height: 400px; display: block;"
-  ></highcharts-chart>
-  <highcharts-chart
-    [Highcharts]="humicharts"
-    [options]="humiChartOptions"
-    style="width: 50%;
-height: 400px; display: block;"
   ></highcharts-chart>
 </div>
 

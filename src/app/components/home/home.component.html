@@ -1,0 +1,54 @@
+<div
+  style=" display: flex;
+justify-content: center;
+align-items: center; margin-top: 50px"
+>
+  <mat-card class="card" style="border-radius: 10px">
+    <mat-card-header>
+      <mat-card-title>
+        <h3>Enter a city to look up the weather</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="enter city"
+          [(ngModel)]="this.city"
+          name="first"
+        />
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="searchCity()"
+        [disabled]="this.city === null || this.city === ' '"
+      >
+        <i class="material-icons">
+          search
+        </i>
+        SEARCH
+      </button>
+      &nbsp;
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="clear()"
+        [disabled]="this.city === null"
+      >
+        <i class="material-icons">
+          clear
+        </i>
+        clear
+      </button>
+      &nbsp;
+      <button mat-raised-button color="primary" (click)="showLog()" disabled>
+        <i class="material-icons">
+          sd_storage
+        </i>
+        show log
+      </button>
+    </form>
+  </mat-card>
+</div>

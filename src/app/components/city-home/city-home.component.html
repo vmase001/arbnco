@@ -1,0 +1,24 @@
+<div *ngIf="home">
+  <h2>
+    The city you looked up is :
+    {{ this.route.snapshot.paramMap.get('city') | uppercase }}
+  </h2>
+  <h5>
+    press the 'chart' button to see a chart for the Temperature and Humidity for
+    the next days
+  </h5>
+  <button mat-raised-button color="primary" routerLink="temp">
+    <i class="material-icons">
+      show_chart
+    </i>
+    Temperature Chart
+  </button>
+  &nbsp;
+  <button mat-raised-button color="primary" routerLink="humidity">
+    <i class="material-icons">
+      show_chart
+    </i>
+    Humidity Chart
+  </button>
+</div>
+<router-outlet></router-outlet>

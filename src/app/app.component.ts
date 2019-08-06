@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Highcharts from 'highcharts';
@@ -12,11 +12,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 @Injectable()
 export class AppComponent {
-  title = 'weather-app';
+  title = 'Weather App';
   data: any;
   loggedData: any;
   city = null;
-  key = 'b68581d5f05bba4d0037174e9e2efb31';
+
   submitted = false;
   tempArray = [];
   humiArray = [];
@@ -24,7 +24,7 @@ export class AppComponent {
   showlog = false;
   date = new Date().toJSON();
 
-  constructor(private http: HttpClient, public db: AngularFirestore) {}
+  constructor(public db: AngularFirestore) {}
 
   tempcharts = Highcharts;
   chartOptions = {
@@ -85,51 +85,5 @@ export class AppComponent {
         this.humiArray.push(element.main.humidity);
       });
     }
-  }
-
-  searchCity() {
-    this.submitted = true;
-    return this.http
-      .get(
-        'https://api.openweathermap.org/data/2.5/forecast?q=' +
-          this.city +
-          '&APPID=' +
-          this.key +
-          '&units=imperial'
-      )
-      .subscribe(response => (this.data = response));
-  }
-
-  clear() {
-    this.submitted = false;
-    this.city = null;
-    this.showChart = false;
-    this.showlog = false;
-  }
-
-  saveQuery() {
-    return this.db.collection('items').add({
-      city: this.city.toLowerCase(),
-      date: this.date,
-      humidity: this.humiArray,
-      temperature: this.tempArray
-    });
-  }
-
-  save() {
-    this.saveQuery();
-    this.clear();
-  }
-
-  getlog() {
-    return this.db
-      .collection('items')
-      .valueChanges()
-      .subscribe(response => (this.loggedData = response));
-  }
-
-  showLog() {
-    this.getlog();
-    this.showlog = true;
   }
 }

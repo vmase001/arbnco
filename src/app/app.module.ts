@@ -1,40 +1,44 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
+import { AppComponent } from './app.component';
 import { HighchartsChartComponent } from 'highcharts-angular';
+import { HeaderComponent } from './header/header.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MaterialModule } from './material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './components/home/home.component';
+
+import { WeatherService } from './services/weather.sevice';
+import { CityHomeComponent } from './components/city-home/city-home.component';
+import { WeatherGraphComponent } from './components/weather-graph/weather-graph.component';
 
 @NgModule({
-  declarations: [AppComponent, HighchartsChartComponent],
+  declarations: [
+    AppComponent,
+    HighchartsChartComponent,
+    HeaderComponent,
+    HomeComponent,
+    CityHomeComponent,
+    WeatherGraphComponent
+  ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatInputModule,
     FormsModule,
-    MatCardModule,
-    MatDividerModule
+    MaterialModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
