@@ -10,6 +10,7 @@ const apiKey = 'b68581d5f05bba4d0037174e9e2efb31';
 export class WeatherService {
   cityDataSubject = new ReplaySubject(1);
   cityDataObservable$ = this.cityDataSubject.asObservable();
+
   constructor(private http: HttpClient, public db: AngularFirestore) {}
 
   searchCity(city: string) {

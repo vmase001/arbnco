@@ -1,0 +1,57 @@
+@import '_variables.scss';
+
+// GENERAL HELPERS
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+/* Text styles */
+
+@mixin text---semi {
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  text-align: center;
+  color: $greyish-brown;
+}
+
+@mixin Caption---semi {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  color: $brown-grey;
+}
+
+@mixin text---form {
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  color: $black;
+}
+
+@mixin text---regular {
+  font-size: 16px;
+  color: #142648;
+}
+
+@mixin Caption---bold {
+  font-size: 12px;
+  font-weight: bold;
+  color: $black;
+}
+
+@mixin text---bold {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+}
+
+@mixin Caption---regular {
+  font-size: 12px;
+  text-align: center;
+  color: $brown-grey;
+}

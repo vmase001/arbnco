@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { WeatherService } from 'src/app/services/weather.sevice';
-import { relative } from 'path';
 
 @Component({
   selector: 'app-city-home',

@@ -1,12 +1,11 @@
-<highcharts-chart
+<ng-container *ngIf="readingNameObservable$ | async as name">
+  <div id="{{ name }}"></div>
+</ng-container>
+
+<!-- <highcharts-chart
+  id="1"
   [Highcharts]="humicharts"
   [options]="humiChartOptions"
   style="width: 50%;
 height: 400px; display: block;"
-></highcharts-chart>
-<highcharts-chart
-  [Highcharts]="humicharts"
-  [options]="humiChartOptions"
-  style="width: 50%;
-height: 400px; display: block;"
-></highcharts-chart>
+></highcharts-chart> -->

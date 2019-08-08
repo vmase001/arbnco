@@ -1,9 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import { WeatherService } from 'src/app/services/weather.sevice';
-import { ChartOptions } from 'highcharts';
-import { combineLatest, Subscription } from 'rxjs';
+import { ChartOptions, Options } from 'highcharts';
+import {
+  combineLatest,
+  Subscription,
+  Subject,
+  Observable,
+  ReplaySubject
+} from 'rxjs';
 
 @Component({
   selector: 'app-weather-graph',
@@ -11,6 +17,13 @@ import { combineLatest, Subscription } from 'rxjs';
   styleUrls: ['./weather-graph.component.css']
 })
 export class WeatherGraphComponent implements OnInit, OnDestroy {
+  @Input() set readingName(name) {
+    console.log(name);
+    this.readingNameSubject.next(name);
+  }
+  readingNameSubject = new ReplaySubject<string>(1);
+  readingNameObservable$ = this.readingNameSubject.asObservable();
+
   reading_names = {
     temp: {
       name: 'Temperature',
@@ -23,7 +36,7 @@ export class WeatherGraphComponent implements OnInit, OnDestroy {
   };
   city: any;
   chartDate: any[] = [];
-  humicharts = Highcharts;
+  // humicharts = Highcharts;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,46 +61,41 @@ export class WeatherGraphComponent implements OnInit, OnDestroy {
     tooltip: {
       valueSuffix: ' %'
     },
-    series: [{ data: [] }]
+    series: [{ name: ' ', data: [] }]
   };
 
   subGetGraphData: Subscription;
   ngOnInit() {
     this.subGetGraphData = combineLatest(
-      this.route.params,
+      this.readingNameObservable$,
       this.weatherService.cityDataObservable$
-    ).subscribe((data: [any, any]) => {
-      const params = data[0];
+    ).subscribe((data: [string, any]) => {
+      const readingName = data[0];
       const cityData = data[1];
+      console.log(cityData);
       this.city = cityData;
-      console.log(this.city);
 
       this.chartDate = [];
       this.city.list.forEach(element => {
-        this.chartDate.push([element.dt_txt, element.main[params.id]]);
+        this.chartDate.push([element.dt_txt, element.main[readingName]]);
       });
-      console.log(this.humiChartOptions);
-      console.log(this.humicharts);
 
-      console.log(this.reading_names[params.id].name);
-      console.log(this.reading_names[params.id].unit);
-
-      this.humiChartOptions.title.text = this.reading_names[params.id].name;
+      this.humiChartOptions.title.text = this.reading_names[readingName].name;
       this.humiChartOptions.yAxis.title.text = this.reading_names[
-        params.id
+        readingName
       ].unit;
+
       setTimeout(() => {
-        console.log(this.humicharts);
-        const chart = this.humicharts.charts.find(x => x !== undefined);
-        if (!chart) {
-          return;
-        }
-        chart.series[0].setData(this.chartDate);
+        const chartOptions: Options = this.humiChartOptions;
+        chartOptions.series[0].data = this.chartDate;
+        chartOptions.series[0].name = this.city.city.name;
+        Highcharts.chart(readingName, chartOptions);
       }, 0); //ImPORTANT
 
-      console.log(this.chartDate);
+      // console.log(this.chartDate);
     });
   }
+
   ngOnDestroy() {
     if (this.subGetGraphData) {
       this.subGetGraphData.unsubscribe();

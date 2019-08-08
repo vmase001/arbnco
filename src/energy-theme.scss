@@ -1,0 +1,140 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// palette generated from: http://mcg.mbitson.com/#!?energreen=%2300b08b&eneraccent=%231e72d5&enerwarn=%23ef5c5c&themename=energy#%2F
+
+$md-energreen: (
+  50: #e0f6f1,
+  100: #b3e7dc,
+  200: #80d8c5,
+  300: #4dc8ae,
+  400: #26bc9c,
+  500: #00b08b,
+  600: #00a983,
+  700: #00a078,
+  800: #00976e,
+  900: #00875b,
+  A100: #b3ffe2,
+  A200: #80ffcf,
+  A400: #4dffbb,
+  A700: #34ffb2,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$md-eneraccent: (
+  50: #e4eefa,
+  100: #bcd5f2,
+  200: #8fb9ea,
+  300: #629ce2,
+  400: #4087db,
+  500: #1e72d5,
+  600: #1a6ad0,
+  700: #165fca,
+  800: #1255c4,
+  900: #0a42ba,
+  A100: #e5ecff,
+  A200: #b3c7ff,
+  A400: #80a2ff,
+  A700: #668fff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$md-enerwarn: (
+  50: #fdebeb,
+  100: #facece,
+  200: #f7aeae,
+  300: #f48d8d,
+  400: #f17474,
+  500: #ef5c5c,
+  600: #ed5454,
+  700: #eb4a4a,
+  800: #e84141,
+  900: #e43030,
+  A100: #ffffff,
+  A200: #fff4f4,
+  A400: #ffc1c1,
+  A700: #ffa7a7,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$custom-primary: mat-palette($md-energreen);
+$custom-accent: mat-palette($md-eneraccent);
+$custom-warn: mat-palette($md-enerwarn);
+
+$energy-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
+
+@include angular-material-theme($energy-theme);
+
+// CUSTOM THEME CONFIGS
+
+// VARIABLES
+$foreground: map-get($energy-theme, foreground);
+$background: map-get($energy-theme, background);
+$primary: map-get($energy-theme, primary);
+$accent: map-get($energy-theme, accent);
+$warn: map-get($energy-theme, warn);
+
+// CUSTOMIZATIOONS
+
+button[mat-raised-button][color='primary'] {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button[mat-stroked-button][color='primary'] {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 600;
+  border-color: mat-color($primary);
+}
+
+button[short] {
+  height: 32px;
+  line-height: 32px;
+}
